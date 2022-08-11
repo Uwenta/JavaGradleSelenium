@@ -39,11 +39,6 @@ public class OrderTest {
 
     @Test
     void shouldTestNameEva(){
-        //ChromeOptions options = new ChromeOptions();
-       // options.addArguments("--disable-dev-shm-usage");
-       // options.addArguments("--no-sandbox");
-       // options.addArguments("--headless");
-       // ChromeDriver driver = new ChromeDriver(options);
         driver.get("http://localhost:9999");
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Ева Нилович");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79024420002");
@@ -56,11 +51,6 @@ public class OrderTest {
 
     @Test
     void shouldTestNameAnna_Maria(){
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--headless");
-        ChromeDriver driver = new ChromeDriver(options);
         driver.get("http://localhost:9999");
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Анна-Мария Нилович");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79024420002");
@@ -72,14 +62,9 @@ public class OrderTest {
     }
 
     @Test
-    void shouldTestNameAlena_Olivia(){
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--headless");
-        ChromeDriver driver = new ChromeDriver(options);
+    void shouldTestNameAlena(){
         driver.get("http://localhost:9999");
-        driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Алена Оливия Нилович");
+        driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Алёна Нилович");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79024420002");
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
         driver.findElement(By.cssSelector("button.button_view_extra")).click();
