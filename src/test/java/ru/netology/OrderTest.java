@@ -11,6 +11,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class OrderTest {
     private WebDriver driver;
@@ -70,6 +71,52 @@ public class OrderTest {
         driver.findElement(By.cssSelector("button.button_view_extra")).click();
         String text = driver.findElement(By.cssSelector("[data-test-id=order-success] ")).getText();
         assertEquals("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.", text.trim());
+
+    }
+
+    @Test
+    void shouldTestInvalidName(){
+        driver.get("http://localhost:9999");
+        driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Angelina Vasina");
+        driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79024421234");
+        driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
+        driver.findElement(By.cssSelector("button.button_view_extra")).click();
+
+        assertTrue(driver.findElement(By.cssSelector(".input_invalid")).isDisplayed());
+
+    }
+
+    @Test
+    void shouldTestInvalidPhone(){
+        driver.get("http://localhost:9999");
+        driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Липова Крисс");
+        driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+7902442123410");
+        driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
+        driver.findElement(By.cssSelector("button.button_view_extra")).click();
+
+        assertTrue(driver.findElement(By.cssSelector(".input_invalid")).isDisplayed());
+
+    }
+
+    @Test
+    void shouldTestShortPhone(){
+        driver.get("http://localhost:9999");
+        driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Липова Крисс");
+        driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+7902");
+        driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
+        driver.findElement(By.cssSelector("button.button_view_extra")).click();
+
+        assertTrue(driver.findElement(By.cssSelector(".input_invalid")).isDisplayed());
+
+    }
+
+    @Test
+    void shouldTestEmptyForm(){
+        driver.get("http://localhost:9999");
+        driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
+        driver.findElement(By.cssSelector("button.button_view_extra")).click();
+
+        assertTrue(driver.findElement(By.cssSelector(".input_invalid")).isDisplayed());
 
     }
 
