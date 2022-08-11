@@ -20,12 +20,15 @@ public class OrderTest {
     static void setUpAll() {
         //System.setProperty("webdriver.chrome.driver", "./drivers/win/chromedriver.exe");
         WebDriverManager.chromedriver().setup();
+
     }
 
     @BeforeEach
 
     void setUp(){
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.setHeadless(true);
+        driver = new ChromeDriver(options);
     }
 
     @AfterEach
@@ -36,11 +39,11 @@ public class OrderTest {
 
     @Test
     void shouldTestNameEva(){
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--headless");
-        ChromeDriver driver = new ChromeDriver(options);
+        //ChromeOptions options = new ChromeOptions();
+       // options.addArguments("--disable-dev-shm-usage");
+       // options.addArguments("--no-sandbox");
+       // options.addArguments("--headless");
+       // ChromeDriver driver = new ChromeDriver(options);
         driver.get("http://localhost:9999");
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Ева Нилович");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79024420002");
